@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Will You Marry Me, Patel? 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root { --p: #ff4d6d; --bg: #fff5f7; }
+        body { margin: 0; background: var(--bg); font-family: 'Quicksand', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; text-align: center; }
+        
+        .container { background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 40px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); width: 85%; z-index: 10; border: 2px solid white; transition: 0.5s; }
+        
+        h1 { font-family: 'Dancing Script', cursive; color: var(--p); font-size: 2.2rem; margin: 0; }
+        .sub { color: #666; font-style: italic; margin: 5px 0 15px; font-size: 1rem; }
+        
+        /* Bunny Box */
+        .bunny-box { width: 100%; height: 180px; display: flex; justify-content: center; margin-bottom: 15px; overflow: hidden; position: relative; }
+        .bunny-box iframe { pointer-events: none; border: none; transform: scale(1.4); }
+
+        .buttons { margin-top: 15px; display: flex; justify-content: center; gap: 12px; min-height: 80px; align-items: center; position: relative; }
+        button { padding: 12px 25px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        #yesBtn { background: var(--p); color: white; z-index: 100; }
+        #noBtn { background: #f8f9fa; color: var(--p); position: relative; }
+
+        .falling { position: fixed; top: -50px; animation: fall linear forwards; z-index: 1; pointer-events: none; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        
+        .hidden { display: none !important; }
+        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--p); color: white; padding: 10px 20px; border-radius: 20px; opacity: 0; transition: 0.5s; font-weight: bold; z-index: 1000; font-size: 0.8rem; }
+        
+        /* Spinning Animation for Success */
+        .spinning { animation: spinContainer 2s infinite ease-in-out alternate; }
+        @keyframes spinContainer { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+    <audio id="music" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/05/Serenade-to-Spring.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="screen1" class="container">
+        <h1>Will You Marry Me, Patel? 💖</h1>
+        <p class="sub">Will you make me a Patel too? 🥺💍</p>
+        
+        <div class="bunny-box" id="bunnyDisplay">
+            <iframe src="https://tenor.com/view/embed/25297230" width="150" height="150"></iframe>
+        </div>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes 💕</button>
+            <button id="noBtn">No 😢</button>
+        </div>
+    </div>
+
+    <div id="screen2" class="container hidden spinning">
+        <h1 style="font-size: 2.5rem;">I KNEW IT! 💋</h1>
+        <div class="bunny-box">
+            <iframe src="https://tenor.com/view/embed/22024102" width="150" height="150"></iframe>
+        </div>
+        <p style="font-weight: bold; color: var(--p);">You've made me the happiest! 😘</p>
+        <div style="font-size: 2.5rem;">💋😘💌💍✨</div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+        const no = document.getElementById('noBtn');
+        const yes = document.getElementById('yesBtn');
+        const bunnyDiv = document.getElementById('bunnyDisplay');
+        const music = document.getElementById('music');
+        const toast = document.getElementById('toast');
+        let count = 0;
+
+        function showToast(msg) {
+            toast.innerText = msg; toast.style.opacity = 1;
+            setTimeout(() => toast.style.opacity = 0, 2000);
+        }
+
+        // Progression of Bunnies for 'No' clicks
+        const bunnies = [
+            '<iframe src="https://tenor.com/view/embed/25297230" width="150" height="150"></iframe>', // Shy
+            '<iframe src="https://tenor.com/view/embed/25297227" width="150" height="150"></iframe>', // Sad
+            '<iframe src="https://tenor.com/view/embed/25297223" width="150" height="150"></iframe>', // Crying
+            '<iframe src="https://tenor.com/view/embed/25297221" width="150" height="150"></iframe>'  // Begging
+        ];
+
+        function rain(emoji) {
+            const e = document.createElement('div'); e.className = 'falling'; e.innerHTML = emoji;
+            e.style.left = Math.random() * 100 + 'vw';
+            e.style.fontSize = Math.random() * 20 + 20 + 'px';
+            e.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(e); setTimeout(() => e.remove(), 4000);
+        }
+        setInterval(() => rain('❤️'), 800);
+
+        no.addEventListener('click', () => {
+            count++;
+            music.play().catch(()=>{});
+            
+            if(count === 1) { 
+                no.innerText = "Are you sure? 🥺"; 
+                bunnyDiv.innerHTML = bunnies[1];
+                showToast("Please rethink... 🥺");
+            } 
+            else if(count === 2) { 
+                no.innerText = "Don't break my heart! 😭"; 
+                bunnyDiv.innerHTML = bunnies[2];
+                showToast("I'm gonna cry! 💔");
+            } 
+            else if(count === 3) {
+                no.innerText = "Think again! 💔";
+                bunnyDiv.innerHTML = bunnies[3];
+                showToast("Please say Yes... 🥺");
+            }
+            else {
+                no.innerText = "Catch me! 😜";
+                no.style.position = 'fixed';
+                no.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+                no.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+                showToast("Arey! Bhag raha hoon! 🏃‍♂️💨");
+            }
+            yes.style.transform = `scale(${1 + count * 0.4})`;
+        });
+
+        yes.addEventListener('click', () => {
+            if(count < 1) {
+                showToast("Pehle 'No' click karke nakhre dikhao! 😂");
+            } else if(count < 3) {
+                showToast("Thoda aur manao mujhe! 🥺");
+            } else {
+                document.getElementById('screen1').classList.add('hidden');
+                document.getElementById('screen2').classList.remove('hidden');
+                document.body.style.background = "#e6fffa"; 
+                setInterval(() => rain('💋'), 200);
+                setInterval(() => rain('🌸'), 150);
+                setInterval(() => rain('💖'), 300);
+            }
+        });
+    </script>
+</body>
+</html>
