@@ -9,7 +9,7 @@ const toast = document.getElementById("toast");
 const mainTitle = document.getElementById("mainTitle");
 
 // Bunny Expression GIFs (starting/emotional)
-const gifs = {
+const gifs = { <link rel="stylesheet" href="style.css">
     shy: "https://media.tenor.com/7S_O6B_f0vEAAAAi/milk-and-mocha.gif",
     sad: "https://media.tenor.com/T0_6pXF7v6UAAAAi/milk-and-mocha.gif",
     crying: "https://media.tenor.com/8mX_O7p_YpAAAAAi/milk-and-mocha.gif",
