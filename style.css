@@ -80,6 +80,7 @@ button {
 }
 
 @keyframes zoomSpin {
+    <link rel="stylesheet" href="style.css">
     0% { transform: scale(1) rotate(-5deg); }
     100% { transform: scale(1.15) rotate(5deg); }
 }
