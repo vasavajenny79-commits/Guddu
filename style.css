@@ -1,0 +1,114 @@
+:root {
+    --bg-color: #f0fff4; /* Soft Pastel Green */
+    --dark-green: #2d6a4f;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    z-index: 10;
+    padding: 15px;
+    width: 100%;
+}
+
+h1 { color: var(--dark-green); font-size: 1.8rem; margin: 0 0 5px 0; }
+.sub { color: #409167; font-size: 1.1rem; margin: 0 0 25px 0; font-style: italic; }
+
+.bunny-card {
+    background: white;
+    padding: 15px;
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.bunny-img { width: 150px; transition: 0.3s; }
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    position: relative;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    white-space: nowrap;
+}
+
+#yesBtn { background: #52b788; color: white; z-index: 100; }
+#noBtn { background: #d8f3dc; color: #1b4332; position: relative; }
+
+.hidden { display: none !important; }
+
+/* Celebration Couple Bunny */
+.celebrate-bunny {
+    width: 220px;
+    animation: zoomSpin 3s infinite ease-in-out alternate;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+@keyframes zoomSpin {
+    0% { transform: scale(1) rotate(-5deg); }
+    100% { transform: scale(1.15) rotate(5deg); }
+}
+
+/* Falling Items */
+.falling-item {
+    position: fixed;
+    top: -10vh;
+    animation: fall linear forwards;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+#toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #409167;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    opacity: 0;
+    transition: 0.5s;
+    font-weight: bold;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.kiss-row { font-size: 3rem; margin-top: 15px; }
